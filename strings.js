@@ -7,7 +7,10 @@ var buttonPress = document.getElementsByClassName("activate");
 //function to run the string functions upon 'enter' keypress
 function enterPress(event) {
     if (event.keyCode === 13) {
-    	var testString = "";
+    	var testString = event.target.value; /*if you pass in 'var testString = "";'
+    										  you are passing an empty string. Your
+    										  functions can't do much with that.*/
+
 		reversal(testString);
 		alphabits(testString);
 		palindrome(testString);
@@ -17,7 +20,14 @@ function enterPress(event) {
 //function to run the string functions on the button press
 
 function onClick(){
-	var testString = "";
+	var testString = inputType[0].value; /*since 'inputType' is assigned by 
+										  'document.getElementsByClass', you 
+										  need to reference the array with the
+										  elements index in the HTMLCollection
+										  that this method returns. May be simpler
+										  to assign these elements an id, since you
+										  could directly access the element by calling
+										  the variable.*/
 	reversal(testString);
 	alphabits(testString);
 	palindrome(testString);
@@ -30,7 +40,7 @@ function onClick(){
 	if(event.keyCode >= 48 && event.keyCode <= 57){
 		inputType.value = "";
 		alert("Please enter a string of letters!");
-		inputType.focus();
+		inputType[0].focus(); //again, need to reference by index
 	}
 }
 
@@ -38,6 +48,7 @@ function onClick(){
 
 
 function reversal(str) {
+	console.log('reversal()');
 	//spliting the str up
 	var stringSplit = str.split('');
 
@@ -49,12 +60,14 @@ function reversal(str) {
 
 	//give me the reversed string
 	return backTogether;
-	console.log(backTogether);
+	console.log(backTogether);//this won't execute after the return statement.
 }
 
 
 
 function alphabits(str) {
+	console.log('alphabits()');
+
 	//split the string up 
 	var stringSplit = str.split('');
 
@@ -73,11 +86,13 @@ function alphabits(str) {
 function palindrome(str) {
 	//split, reverse, then join the string
 	// var newWord = ;
+	console.log('palindrome');
 	if(str === str.split("").reverse().join("")){//this isn't working and I am not sure why
 		alert("That's a palindrome!")
 	} else {
 		alert("I'm not mad...just disappointed you didn't give me a palindrome.");
 	}
 }
+
 
 
